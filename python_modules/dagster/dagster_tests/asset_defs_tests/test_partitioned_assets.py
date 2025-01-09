@@ -1,5 +1,5 @@
+from datetime import date, datetime
 from typing import Optional
-from datetime import datetime, date
 
 import dagster._check as check
 import pytest
@@ -14,8 +14,6 @@ from dagster import (
     DailyPartitionsDefinition,
     DynamicPartitionsDefinition,
     HourlyPartitionsDefinition,
-    MonthlyPartitionsDefinition,
-    WeeklyPartitionsDefinition,
     InputContext,
     IOManager,
     IOManagerDefinition,
@@ -811,13 +809,16 @@ def test_asset_spec_partitions_def():
         )
         def assets4(): ...
 
+
 def test_time_partitioned_asset_get_partition_key():
     hourly_partition_definition = HourlyPartitionsDefinition(start_date="2021-05-05-00:00")
+
     @asset(partitions_def=hourly_partition_definition)
     def hourly_asset():
         pass
 
     daily_partition_definition = DailyPartitionsDefinition(start_date="2021-05-05")
+
     @asset(partitions_def=daily_partition_definition)
     def daily_asset():
         pass

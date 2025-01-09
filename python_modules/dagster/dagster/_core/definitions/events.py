@@ -1,5 +1,5 @@
-from abc import ABC, abstractmethod
 import datetime
+from abc import ABC, abstractmethod
 from enum import Enum
 from typing import (
     TYPE_CHECKING,
@@ -414,7 +414,9 @@ class AssetMaterialization(
             check.opt_mapping_param(metadata, "metadata", key_type=str),
         )
 
-        partition = check.opt_inst_param(partition, "partition", (str, datetime.date, datetime.datetime))
+        partition = check.opt_inst_param(
+            partition, "partition", (str, datetime.date, datetime.datetime)
+        )
         if isinstance(partition, (datetime.date, datetime.datetime)):
             partition = partition.isoformat()
 
